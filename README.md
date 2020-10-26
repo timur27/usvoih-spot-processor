@@ -1,5 +1,5 @@
-## Usvoih
- 
+## Usvoih ![CircleCI](https://circleci.com/gh/timur27/usvoih-spot-processor.svg?style=svg)
+
 ### Project functionalities 
 * CRUD operations on spots/extended spots 
 * Filtering by
