@@ -3,26 +3,22 @@ package com.usvoih.persistence;
 import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.repository.SpotRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = SpotRepository.class)
-@RunWith(SpringRunner.class)
-@EnableJpaRepositories(basePackages = "com.usvoih.persistence.repository")
 public class CrudOperationsTest {
 
     @Autowired
     private SpotRepository spotRepository;
 
     @Test
-    void should_persist_spot_succesfully () {
+    public void should_persist_spot_successfully () {
         // given one persisted spot
         Spot spot = prepareSpot();
         spotRepository.save(spot);
@@ -31,7 +27,7 @@ public class CrudOperationsTest {
         List<Spot> spots = spotRepository.findAll();
 
         // then there is only one spot returned
-        assertTrue(spots.size() == 1);
+        assertEquals(spots.size(), 1);
     }
 
     private Spot prepareSpot() {
