@@ -1,35 +1,74 @@
 package com.usvoih.persistence;
 
+import com.usvoih.config.LocalPersistenceContext;
 import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.repository.SpotRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+// TODO add tests before implementing extended spot
 @SpringBootTest(classes = SpotRepository.class)
+@EnableJpaRepositories
+@Import(LocalPersistenceContext.class)
 public class CrudOperationsTest {
 
     @Autowired
     private SpotRepository spotRepository;
 
-    @Test
-    public void should_persist_spot_successfully () {
-        // given one persisted spot
-        Spot spot = prepareSpot();
-        spotRepository.save(spot);
-
-        // when trying to find all persisted spots
-        List<Spot> spots = spotRepository.findAll();
-
-        // then there is only one spot returned
-        assertEquals(spots.size(), 1);
+    @AfterEach
+    public void tearDown() {
+        spotRepository.deleteAll();
     }
 
-    private Spot prepareSpot() {
-        return new Spot();
+    @Test
+    public void should_persist_spot_successfully () {
+        spotRepository.save(new Spot());
+
+        List<Spot> spots = spotRepository.findAll();
+
+        assertThat(spots).isNotEmpty();
+        assertThat(spots).hasSize(1);
+    }
+
+    @Test
+    public void should_remove_spot_successfully () {
+        Spot spot = new Spot();
+        spotRepository.save(spot);
+
+        Optional<Spot> spotToDelete = spotRepository.findById(spot.getId());
+        spotToDelete.ifPresent(spotRepository::delete);
+
+        assertThat(spotRepository.findAll()).isEmpty();
+    }
+
+    @Test
+    public void should_update_existing_spot() {
+        String updatedName = "updated name";
+        spotRepository.save(new Spot());
+
+        Optional<Spot> updated = spotRepository.findAll().stream().findFirst();
+        updated.ifPresentOrElse(s -> {
+                        s.setName(updatedName);
+                        spotRepository.save(s);
+                }, () -> {throw new NoSuchElementException();});
+
+
+        List<Spot> spots = spotRepository.findAll();
+        assertThat(spots).isNotEmpty();
+        assertThat(spots).hasSize(1);
+        assertNotNull(spots.get(0).getName());
+        assertEquals(spots.get(0).getName(), updatedName);
     }
 }
