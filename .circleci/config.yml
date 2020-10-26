@@ -1,17 +1,14 @@
 version: 2.1
 
+executors:
+  java-version:
+    docker:
+      - image: cimg/openjdk:15.0.0
+
 orbs:
-  maven: circleci/maven@0.0.12
+  maven: circleci/maven@1.0.0
 
 workflows:
-  code_compiling:
-    jobs:
-      build:
-        docker:
-          - image: cimg/openjdk:15.0.0
-        steps:
-          - checkout
-          - run: java --version
   maven_test:
     jobs:
-      - maven/test
+      - maven/test # checkout, build, test, and upload test results
