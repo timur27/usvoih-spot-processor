@@ -8,3 +8,9 @@ workflows:
     jobs:
       - maven/test # checkout, build, test, and upload test results
 
+commands:
+  openjdk:
+    parameters:
+      version:
+        type: integer
+        default: 11
