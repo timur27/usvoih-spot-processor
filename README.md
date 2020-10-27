@@ -18,3 +18,55 @@
     
 ### Phase 2 functionalities 
 * Multilingual UI
+
+
+### Acceptance Criteria
+#### New Spot
+##### JSON
+```sh
+{
+ "name": "qweq2we2133",
+ "description": "Restaurant in the middle of the town",
+ "addresses" : [
+ 	{
+ 		"country": "Polska",
+		"city": "Kraków 30-724"
+ 	}
+ ],
+ "type" : {
+  "category": "Food", 
+  "subcategory": "Restaurant"
+ },
+ "contact" : {
+  "phone": "", 
+  "email": "spot_email@yahoo.de",
+  "website": "restaurantbyus.uk",
+  "instagram": "instagram",
+  "facebook": "facebook",
+  "vk": "vk"
+ },
+ "coverPhoto" : "sample_bytes_array_to_save",
+ "photos": [
+	"img.com/img.jpg",
+	"img.com/img.jpg",
+	"img.com/img.jpg"
+ ]
+ "businessHours" : [
+  {
+   "day": "Monday",
+   "openHour": "7:00AM",
+   "closeHour": "6:00PM"
+  }
+ ],
+ "tags": [
+	"coffee",
+	"atmosphere",
+	"loft"
+ ]
+}
+``` 
+
+##### Required fields 
+```
+Name, Country, City, Phone Number
+```
