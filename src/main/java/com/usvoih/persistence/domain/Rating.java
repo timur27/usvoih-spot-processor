@@ -3,7 +3,6 @@ package com.usvoih.persistence.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,9 +17,9 @@ public class Rating {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Spot spot;
+
     private Double rating;
     private String review;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @Override

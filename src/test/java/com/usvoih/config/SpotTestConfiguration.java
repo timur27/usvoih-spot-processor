@@ -18,8 +18,8 @@ public class SpotTestConfiguration {
         spotDetailsDto.setAddresses(List.of(createTestAddress()));
         spotDetailsDto.setType(createTestType());
         spotDetailsDto.setContact(createTestContact());
-        spotDetailsDto.setCoverPhoto("Test Cover Photo".getBytes());
-        spotDetailsDto.setPhotos(List.of("Test Photo 1".getBytes(), "Test Photo 2".getBytes()));
+        spotDetailsDto.setCoverPhoto("Test Cover Photo");
+        spotDetailsDto.setPhotos("Test Photo 1, Test Photo 2");
         spotDetailsDto.setBusinessHours(List.of(createTestBusinessHours()));
         spotDetailsDto.setRatings(List.of(createTestRating()));
 

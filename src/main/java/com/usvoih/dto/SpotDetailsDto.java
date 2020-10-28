@@ -12,8 +12,8 @@ public class SpotDetailsDto {
     private List<AddressDto> addresses;
     private TypeDto type;
     private ContactDto contact;
-    private byte[] coverPhoto;
-    private List<byte[]> photos;
+    private String coverPhoto;
+    private String photos;
     private List<BusinessHourDto> businessHours;
     private List<RatingDto> ratings;
 }

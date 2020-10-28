@@ -1,6 +1,7 @@
 package com.usvoih.persistence;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.usvoih.config.SpotTestConfiguration;
 import com.usvoih.dto.SpotDetailsDto;
@@ -30,7 +31,8 @@ public class SpotCommandControllerTest {
     @BeforeEach
     public void setUp() {
         jsonMapper = new ObjectMapper()
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     @Test
@@ -38,8 +40,8 @@ public class SpotCommandControllerTest {
 
     @Test
     public void should_add_new_spot_with_unapproved_status() throws Exception {
-        SpotDetailsDto spotDetailsDto = SpotTestConfiguration.createTestSpot();
-        String json = jsonMapper.writeValueAsString(spotDetailsDto);
+        SpotDetailsDto request = SpotTestConfiguration.createTestSpot();
+        String json = jsonMapper.writeValueAsString(request);
 
         MvcResult result = this.mockMvc.perform(post("/spots")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -48,6 +50,7 @@ public class SpotCommandControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        assertEquals(result.getResponse().getContentAsString(), json);
+        SpotDetailsDto response = jsonMapper.readValue(result.getResponse().getContentAsString(), SpotDetailsDto.class);
+        assertEquals(request, response);
     }
 }

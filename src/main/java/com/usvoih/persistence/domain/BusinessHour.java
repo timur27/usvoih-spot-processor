@@ -1,5 +1,6 @@
 package com.usvoih.persistence.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.usvoih.dto.Day;
 import lombok.Getter;
@@ -18,7 +19,9 @@ public class BusinessHour {
 
     private Day day;
 
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime open;
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime close;
 
     @JsonIgnore

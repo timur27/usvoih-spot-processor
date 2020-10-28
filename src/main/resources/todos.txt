@@ -4,4 +4,5 @@
 // TODO if we are adding a review to spot, should mobile/UI send json with the whole spot(not necessary) or just spot_id and review data?
 // TODO decide what to do with TAGS, how to store them? (many to many, string in dto -> list<string> after mapping to entity?)
 // TODO tests for adding ratings
-// TODO convert json to LocalDate via annotations
+// TODO refactor modelMapper config
+// TODO coverphoto convert to input byte[]
