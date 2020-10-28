@@ -31,13 +31,12 @@ public class LocalPersistenceContext {
 
     @Bean
     public DataSource getDataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:mem:test");
-        dataSourceBuilder.username("admin");
-        dataSourceBuilder.password("");
-
-        return dataSourceBuilder.build();
+        return DataSourceBuilder.create()
+                .driverClassName("org.h2.Driver")
+                .url("jdbc:h2:mem:test")
+                .username("admin")
+                .password("")
+                .build();
     }
 
     Properties additionalProperties() {

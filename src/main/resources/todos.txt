@@ -1,0 +1,8 @@
+// TODO check composite key from two columns in this entity (Type entity)
+// TODO think about photo url in entity and photo bytes in dtos - is this a good approach?
+// TODO how to map: photos (bytes to url), business hours(string to localtime) and how to enrich many to one enitities with spot data?
+// TODO if we are adding a review to spot, should mobile/UI send json with the whole spot(not necessary) or just spot_id and review data?
+// TODO decide what to do with TAGS, how to store them? (many to many, string in dto -> list<string> after mapping to entity?)
+// TODO tests for adding ratings
+// TODO refactor modelMapper config
+// TODO coverphoto convert to input byte[]

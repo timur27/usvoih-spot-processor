@@ -64,7 +64,6 @@ public class CrudOperationsTest {
                         spotRepository.save(s);
                 }, () -> {throw new NoSuchElementException();});
 
-
         List<Spot> spots = spotRepository.findAll();
         assertThat(spots).isNotEmpty();
         assertThat(spots).hasSize(1);
