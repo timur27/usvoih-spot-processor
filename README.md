@@ -70,3 +70,21 @@
 ```
 Name, Country, City, Phone Number
 ```
+
+##### Spot types 
+###### Categories 
+```
+Food
+Health
+Service
+Shops
+Entertainments
+Business
+Education
+Beauty
+```
+
+###### Subcategories
+```
+Unique values, provided as raw string by user, and validated by moderator/admin.
+```
