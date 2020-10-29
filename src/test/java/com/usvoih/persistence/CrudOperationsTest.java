@@ -1,10 +1,13 @@
 package com.usvoih.persistence;
 
-import com.usvoih.config.LocalPersistenceContext;
+import com.usvoih.config.LocalPersistenceConfig;
+import com.usvoih.config.ModelMapperConfig;
+import com.usvoih.config.SpotTestConfiguration;
 import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.repository.SpotRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -21,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 // TODO add tests before implementing extended spot
 @SpringBootTest(classes = SpotRepository.class)
 @EnableJpaRepositories
-@Import(LocalPersistenceContext.class)
+@Import({LocalPersistenceConfig.class, ModelMapperConfig.class})
 public class CrudOperationsTest {
 
     @Autowired

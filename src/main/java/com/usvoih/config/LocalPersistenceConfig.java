@@ -1,6 +1,5 @@
 package com.usvoih.config;
 
-import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-public class LocalPersistenceContext {
+public class LocalPersistenceConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -35,16 +34,7 @@ public class LocalPersistenceContext {
                 .driverClassName("org.h2.Driver")
                 .url("jdbc:h2:mem:test")
                 .username("admin")
-                .password("")
                 .build();
-    }
-
-    Properties additionalProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-
-        return properties;
     }
 
     @Bean
@@ -53,5 +43,13 @@ public class LocalPersistenceContext {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
+    }
+
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+
+        return properties;
     }
 }

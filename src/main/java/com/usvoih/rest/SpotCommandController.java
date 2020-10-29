@@ -23,6 +23,6 @@ public class SpotCommandController {
     @RequestMapping(method = RequestMethod.POST)
     public Spot addSpot(@RequestBody SpotDetailsDto spotDetailsDto) {
         Spot spot = modelMapper.map(spotDetailsDto, Spot.class);
-        return spotService.save(spot);
+        return spotService.processNewSpot(spot);
     }
 }
