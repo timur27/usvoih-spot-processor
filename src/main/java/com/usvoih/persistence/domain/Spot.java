@@ -24,7 +24,7 @@ public class Spot {
                orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, optional = true)
     private Type type;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -45,6 +45,9 @@ public class Spot {
             orphanRemoval = true
     )
     private List<Rating> ratings = new ArrayList<>();
+
+    @Enumerated(value = EnumType.STRING)
+    private Status status = Status.UNAPPROVED;
 
     public void setAddresses(List<Address> addresses) {
         addresses.forEach(address -> address.setSpot(this));

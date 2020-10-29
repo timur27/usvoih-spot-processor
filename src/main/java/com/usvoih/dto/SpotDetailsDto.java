@@ -1,6 +1,5 @@
 package com.usvoih.dto;
 
-
 import lombok.Data;
 
 import java.util.List;

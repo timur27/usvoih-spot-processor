@@ -11,18 +11,23 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class ModelMapperConfig {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
+
         modelMapper.typeMap(RatingDto.class, Rating.class)
-                .addMappings(mapper -> mapper.using(localDateConverter()).map(RatingDto::getDate, Rating::setDate));
+                .addMappings(mapper -> mapper.using(localDateConverter())
+                        .map(RatingDto::getDate, Rating::setDate));
+
         modelMapper.typeMap(BusinessHourDto.class, BusinessHour.class)
-                .addMappings(mapper -> mapper.using(localTimeConverter()).map(BusinessHourDto::getOpen, BusinessHour::setOpen))
-                .addMappings(mapper -> mapper.using(localTimeConverter()).map(BusinessHourDto::getClose, BusinessHour::setClose));
+                .addMappings(mapper -> mapper.using(localTimeConverter())
+                        .map(BusinessHourDto::getOpen, BusinessHour::setOpen))
+                .addMappings(mapper -> mapper.using(localTimeConverter())
+                        .map(BusinessHourDto::getClose, BusinessHour::setClose));
+
         return modelMapper;
     }
 
