@@ -30,11 +30,11 @@ public class SpotServiceTest {
     public void should_add_new_spot_with_existing_type() {
         Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         Spot duplicatedSpot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
-        this.spotService.processNewSpot(spot);
+        this.spotService.save(spot);
 
         assertThat(this.spotRepository.findAll()).hasSize(1);
         assertThat(this.typeRepository.findAll()).hasSize(1);
-        this.spotService.processNewSpot(duplicatedSpot);
+        this.spotService.save(duplicatedSpot);
         assertThat(this.spotRepository.findAll()).hasSize(2);
         assertThat(this.typeRepository.findAll()).hasSize(1);
 
