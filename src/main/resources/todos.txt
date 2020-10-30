@@ -1,4 +1,7 @@
-// TODO Generalize children entity checking for uniqueness and saving (Type entity is presented currently)
+// TODO fix @Disabled test
+// TODO init entity->repo map when initializing context
+// TODO add unique constraints to addresses
+// TODO Generalize children entity checking for uniqueness and saving (Type entity/Business hours entity)
 // TODO Rewrite using camel spotService.save(newSpot)
 // TODO Refactor Type persistence when adding new spot
 // TODO check composite key from two columns in this entity (Type entity)

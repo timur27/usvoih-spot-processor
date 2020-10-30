@@ -5,6 +5,7 @@ import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.repository.SpotRepository;
 import com.usvoih.persistence.repository.TypeRepository;
 import com.usvoih.processing.SpotService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class SpotServiceTest {
         this.spotService.save(duplicatedSpot);
         assertThat(this.spotRepository.findAll()).hasSize(2);
         assertThat(this.typeRepository.findAll()).hasSize(1);
+    }
+
+    @Test
+    @Disabled
+    public void should_add_new_spot_with_existing_business_hours() {
 
     }
 }
