@@ -24,7 +24,7 @@ public class Spot {
                orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @ManyToOne
     private Type type;
 
     @OneToOne(cascade = CascadeType.ALL)

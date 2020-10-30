@@ -39,6 +39,11 @@ public class SpotServiceTest {
         this.spotService.save(duplicatedSpot);
         assertThat(this.spotRepository.findAll()).hasSize(2);
         assertThat(this.typeRepository.findAll()).hasSize(1);
+    }
+
+    @Test
+    @Disabled
+    public void should_add_new_spot_with_existing_business_hours() {
 
     }
 }
