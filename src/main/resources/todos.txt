@@ -1,3 +1,5 @@
+// TODO add uniqueness on main spot fields (name, desc etc)
+// TODO add uniqueness on business hours in db 
 // TODO fix @Disabled test
 // TODO init entity->repo map when initializing context
 // TODO add unique constraints to addresses

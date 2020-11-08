@@ -2,8 +2,10 @@ package com.usvoih.config;
 
 import com.usvoih.dto.BusinessHourDto;
 import com.usvoih.dto.RatingDto;
+import com.usvoih.dto.SpotDetailsDto;
 import com.usvoih.persistence.domain.BusinessHour;
 import com.usvoih.persistence.domain.Rating;
+import com.usvoih.persistence.domain.Spot;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,7 @@ public class ModelMapperConfig {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
 
         modelMapper.typeMap(RatingDto.class, Rating.class)
                 .addMappings(mapper -> mapper.using(localDateConverter())

@@ -22,7 +22,11 @@
 
 ### Acceptance Criteria
 #### New Spot
-##### JSON
+
+##### JSON fields AC
+* Open and close hours for spot are in 24H format, with '0' at the beginning for 1-digit cases (e.g. 07:00 instead of 7:00)
+* Photos - one string, not an array. Argument: no need to create separate table in DB, just maintain the data as one JSON string in one column 
+##### JSON (not all fields present)
 ```sh
 {
  "name": "qweq2we2133",
@@ -41,28 +45,26 @@
   "phone": "", 
   "email": "spot_email@yahoo.de",
   "website": "restaurantbyus.uk",
-  "instagram": "instagram",
+  "instagram": "instagram",≥≤≥
   "facebook": "facebook",
   "vk": "vk"
- },
+ },≤
  "coverPhoto" : "sample_bytes_array_to_save",
- "photos": [
-	"img.com/img.jpg",
-	"img.com/img.jpg",
-	"img.com/img.jpg"
- ]
+ "photos": "img.com/img.jpg, img.com/img.jpg, img.com/img.jpg",
  "businessHours" : [
   {
    "day": "Monday",
-   "openHour": "7:00AM",
-   "closeHour": "6:00PM"
+   "openHour": "07:00",
+   "closeHour": "22:00"
   }
  ],
- "tags": [
-	"coffee",
-	"atmosphere",
-	"loft"
- ]
+"ratings": [
+    {
+        "rating": 3.7, 
+        "review": "Not bad, but sometimes need to wait more time",
+        "date": "2020-11-08"
+    }
+]
 }
 ``` 
 
@@ -70,7 +72,10 @@
 ```
 Name, Country, City, Phone Number
 ```
-
+##### Unique fields
+```
+Name, <City, Street, House, Apartment>
+```
 ##### Spot types 
 ###### Categories 
 ```

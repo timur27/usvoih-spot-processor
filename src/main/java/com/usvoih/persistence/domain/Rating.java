@@ -20,6 +20,7 @@ public class Rating {
 
     private Double rating;
     private String review;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @Override

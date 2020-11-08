@@ -1,6 +1,7 @@
 package com.usvoih.persistence.domain;
 
 import com.usvoih.dto.Category;
+import com.usvoih.dto.Unique;
 import lombok.Data;
 
 import javax.persistence.*;

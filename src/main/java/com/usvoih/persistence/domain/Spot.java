@@ -1,5 +1,8 @@
 package com.usvoih.persistence.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.usvoih.dto.Category;
+import com.usvoih.dto.Unique;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,10 +27,11 @@ public class Spot {
                orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
+    @Unique
     @ManyToOne
     private Type type;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.ALL})
     private Contact contact;
 
     private String coverPhoto;
@@ -62,5 +66,15 @@ public class Spot {
     public void setRatings(List<Rating> ratings) {
         ratings.forEach(rating -> rating.setSpot(this));
         this.ratings = ratings; 
+    }
+
+    @JsonIgnore
+    public Category getTypeCategory() {
+        return this.getType().getCategory();
+    }
+
+    @JsonIgnore
+    public String getTypeSubcategory() {
+        return this.getType().getSubcategory();
     }
 }
