@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TypeProcessor implements UniqueEntryProcessor {
+public class TypeProcessor implements UniqueEntryProcessor<Spot> {
 
     @Autowired
     private TypeRepository typeRepository;

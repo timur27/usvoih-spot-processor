@@ -57,7 +57,7 @@ public class SpotTestConfiguration {
 
     private static ContactDto createTestContact() {
         ContactDto contactDto = new ContactDto();
-        contactDto.setPhone(73627836);
+        contactDto.setPhone("73627836");
         contactDto.setEmail("test.email@gmail.com");
         contactDto.setWebsite("Test Website");
         contactDto.setInstagram("Test Instagram");
