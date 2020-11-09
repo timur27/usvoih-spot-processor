@@ -45,10 +45,10 @@
   "phone": "", 
   "email": "spot_email@yahoo.de",
   "website": "restaurantbyus.uk",
-  "instagram": "instagram",≥≤≥
+  "instagram": "instagram",
   "facebook": "facebook",
   "vk": "vk"
- },≤
+ },
  "coverPhoto" : "sample_bytes_array_to_save",
  "photos": "img.com/img.jpg, img.com/img.jpg, img.com/img.jpg",
  "businessHours" : [

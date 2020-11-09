@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.usvoih.config.SpotTestConfiguration;
 import com.usvoih.dto.SpotDetailsDto;
+import com.usvoih.persistence.domain.Address;
+import com.usvoih.processing.ex.SpotValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,8 +44,8 @@ public class SpotCommandControllerTest {
 
     @Test
     public void should_add_new_spot_with_unapproved_status() throws Exception {
-        SpotDetailsDto request = SpotTestConfiguration.createTestSpot();
-        String json = jsonMapper.writeValueAsString(request);
+        SpotDetailsDto req = SpotTestConfiguration.createTestSpot();
+        String json = jsonMapper.writeValueAsString(req);
 
         MvcResult result = this.mockMvc.perform(post("/spots")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -50,7 +54,29 @@ public class SpotCommandControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        SpotDetailsDto response = jsonMapper.readValue(result.getResponse().getContentAsString(), SpotDetailsDto.class);
-        assertEquals(request, response);
+        SpotDetailsDto res = jsonMapper.readValue(result.getResponse().getContentAsString(), SpotDetailsDto.class);
+        assertEquals(req, res);
+    }
+
+    @Test
+    public void should_validate_required_fields_and_return_bad_request() throws Exception {
+        SpotDetailsDto req = SpotTestConfiguration.createTestSpot();
+        req.setName(null);
+        req.getAddresses().forEach(addressDto -> addressDto.setCountry(null));
+        req.getContact().setPhone(null);
+
+        String json = jsonMapper.writeValueAsString(req);
+
+        MvcResult result = this.mockMvc.perform(post("/spots")
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .content(json))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        assertEquals(result.getResponse().getContentAsString(), jsonMapper.writeValueAsString(new SpotValidationError(
+                List.of("Spot's country cannot be empty",
+                        "Spot's name cannot be empty",
+                        "Spot's phone number cannot be empty"))));
     }
 }

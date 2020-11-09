@@ -2,6 +2,7 @@
 // TODO add uniqueness on business hours in db 
 // TODO fix @Disabled test
 // TODO init entity->repo map when initializing context
+// TODO decide if not change String phone to int phone
 // TODO add unique constraints to addresses
 // TODO Generalize children entity checking for uniqueness and saving (Type entity/Business hours entity)
 // TODO Rewrite using camel spotService.save(newSpot)
