@@ -93,3 +93,10 @@ Beauty
 ```
 Unique values, provided as raw string by user, and validated by moderator/admin.
 ```
+
+##### Database
+###### Unique Constraints on db (when saving duplicated value, the existing one is used)  
+```
+Type, 
+BusinessHour
+```
