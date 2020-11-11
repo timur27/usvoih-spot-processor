@@ -5,16 +5,21 @@ import com.usvoih.dto.Category;
 import com.usvoih.dto.Unique;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 public class Spot {
     @Id
+    @Column(name = "spot_id")
     @GeneratedValue
     private Long id;
 
@@ -38,10 +43,12 @@ public class Spot {
 
     private String photos;
 
-    @OneToMany(mappedBy = "spot",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<BusinessHour> businessHours = new ArrayList<>();
+    @Unique
+    @ManyToMany
+    @JoinTable(name = "spot_hours",
+                joinColumns = @JoinColumn(name = "spot_id"),
+                inverseJoinColumns = @JoinColumn(name = "business_hour_id"))
+    private Set<BusinessHour> businessHours = new HashSet<>();
 
     @OneToMany(
             mappedBy = "spot",
@@ -58,9 +65,14 @@ public class Spot {
         this.addresses = addresses;
     }
 
-    public void setBusinessHours(List<BusinessHour> businessHours) {
-        businessHours.forEach(businessHour -> businessHour.setSpot(this));
-        this.businessHours = businessHours;
+    public void addBusinessHour(BusinessHour businessHour) {
+        businessHours.add(businessHour);
+        businessHour.getSpots().add(this);
+    }
+
+    public void removeBusinessHour(BusinessHour businessHour) {
+        businessHours.remove(businessHour);
+        businessHour.getSpots().remove(this);
     }
 
     public void setRatings(List<Rating> ratings) {
@@ -76,5 +88,17 @@ public class Spot {
     @JsonIgnore
     public String getTypeSubcategory() {
         return this.getType().getSubcategory();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Spot)) return false;
+        return id != null && id.equals(((Spot) obj).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return 33;
     }
 }

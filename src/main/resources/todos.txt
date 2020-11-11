@@ -1,17 +1,17 @@
-// TODO add uniqueness on main spot fields (name, desc etc)
-// TODO add uniqueness on business hours in db 
-// TODO fix @Disabled test
+// TODO Review UniqueEntryProcessor implementations
 // TODO init entity->repo map when initializing context
 // TODO decide if not change String phone to int phone
 // TODO add unique constraints to addresses
-// TODO Generalize children entity checking for uniqueness and saving (Type entity/Business hours entity)
 // TODO Rewrite using camel spotService.save(newSpot)
-// TODO Refactor Type persistence when adding new spot
-// TODO check composite key from two columns in this entity (Type entity)
 // TODO think about photo url in entity and photo bytes in dtos - is this a good approach?
-// TODO how to map: photos (bytes to url), business hours(string to localtime) and how to enrich many to one enitities with spot data?
 // TODO if we are adding a review to spot, should mobile/UI send json with the whole spot(not necessary) or just spot_id and review data?
 // TODO decide what to do with TAGS, how to store them? (many to many, string in dto -> list<string> after mapping to entity?)
 // TODO tests for adding ratings
 // TODO refactor modelMapper config
 // TODO coverphoto convert to input byte[]
+
+
+// DONE Generalize children entity checking for uniqueness and saving (Type entity/Business hours entity)
+// DONE add uniqueness on main spot fields (name, desc etc)
+// DONE add uniqueness on business hours in db
+// DONE fix @Disabled test

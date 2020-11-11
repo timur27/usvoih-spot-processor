@@ -7,6 +7,8 @@ import com.usvoih.persistence.repository.SpotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 
 import static java.util.Objects.requireNonNull;
@@ -18,14 +20,23 @@ public class SpotService {
     private SpotRepository spotRepository;
 
     public Spot save(Spot spot) {
-        cascadeSaveChildren(spot);
+        cascadeSaveUniqueChildren(spot);
         return spotRepository.save(spot);
     }
 
-    private void cascadeSaveChildren(Spot spot) {
+    private void cascadeSaveUniqueChildren(Spot spot) {
         requireNonNull(spot);
         Arrays.stream(spot.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(Unique.class))
-                .forEach(field -> UniqueProcessorMap.processorMap.get(field.getType()).processUniqueEntry(spot));
+                .forEach(field -> UniqueProcessorMap.processorMap.get(getFieldType(field)).processAndSaveUniqueEntry(spot));
+    }
+
+    private Class<?> getFieldType(Field field) {
+        if (field.getGenericType() instanceof ParameterizedType) {
+            ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
+            return (Class<?>) stringListType.getActualTypeArguments()[0];
+        } else {
+            return field.getType();
+        }
     }
 }
