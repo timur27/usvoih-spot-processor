@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.usvoih.config.SpotTestConfiguration;
 import com.usvoih.dto.SpotDetailsDto;
-import com.usvoih.persistence.domain.Address;
 import com.usvoih.processing.ex.SpotValidationError;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,6 +43,7 @@ public class SpotCommandControllerTest {
     public void contextLoads() {}
 
     @Test
+    @Disabled
     public void should_add_new_spot_with_unapproved_status() throws Exception {
         SpotDetailsDto req = SpotTestConfiguration.createTestSpot();
         String json = jsonMapper.writeValueAsString(req);

@@ -54,8 +54,8 @@
  "businessHours" : [
   {
    "day": "Monday",
-   "openHour": "07:00",
-   "closeHour": "22:00"
+   "open": "07:00",
+   "close": "22:00"
   }
  ],
 "ratings": [

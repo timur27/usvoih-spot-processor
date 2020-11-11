@@ -2,10 +2,11 @@ package com.usvoih.persistence;
 
 import com.usvoih.config.SpotTestConfiguration;
 import com.usvoih.persistence.domain.Spot;
+import com.usvoih.persistence.repository.BusinessHourRepository;
 import com.usvoih.persistence.repository.SpotRepository;
 import com.usvoih.persistence.repository.TypeRepository;
 import com.usvoih.processing.SpotService;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,16 @@ public class SpotServiceTest {
     @Autowired
     private TypeRepository typeRepository;
 
+    @Autowired
+    private BusinessHourRepository businessHourRepository;
+
+    @AfterEach
+    public void tearDown() {
+        this.spotRepository.deleteAll();
+        this.typeRepository.deleteAll();
+        this.businessHourRepository.deleteAll();
+    }
+
     @Test
     public void should_add_new_spot_with_existing_type() {
         Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
@@ -40,8 +51,14 @@ public class SpotServiceTest {
     }
 
     @Test
-    @Disabled
     public void should_add_new_spot_with_existing_business_hours() {
+        Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
+        Spot duplicatedSpot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
+        this.spotService.save(spot);
 
+        this.spotService.save(duplicatedSpot);
+
+        assertThat(this.spotRepository.findAll()).hasSize(2);
+        assertThat(this.businessHourRepository.findAll()).hasSize(1);
     }
 }

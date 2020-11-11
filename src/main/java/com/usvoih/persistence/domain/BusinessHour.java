@@ -8,12 +8,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 public class BusinessHour {
     @Id
+    @Column(name = "business_hour_id")
     @GeneratedValue
     private Long id;
 
@@ -25,8 +28,8 @@ public class BusinessHour {
     private LocalTime close;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Spot spot;
+    @ManyToMany(mappedBy = "businessHours")
+    private Set<Spot> spots = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
