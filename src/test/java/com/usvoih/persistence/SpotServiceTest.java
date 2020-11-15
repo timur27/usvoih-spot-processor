@@ -42,9 +42,9 @@ public class SpotServiceTest {
     public void should_add_new_spot_with_existing_type() {
         Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         Spot duplicatedSpot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
-        this.spotService.save(spot);
+        this.spotService.validateAndSave(spot);
 
-        this.spotService.save(duplicatedSpot);
+        this.spotService.validateAndSave(duplicatedSpot);
 
         assertThat(this.spotRepository.findAll()).hasSize(2);
         assertThat(this.typeRepository.findAll()).hasSize(1);
@@ -54,9 +54,9 @@ public class SpotServiceTest {
     public void should_add_new_spot_with_existing_business_hours() {
         Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         Spot duplicatedSpot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
-        this.spotService.save(spot);
+        this.spotService.validateAndSave(spot);
 
-        this.spotService.save(duplicatedSpot);
+        this.spotService.validateAndSave(duplicatedSpot);
 
         assertThat(this.spotRepository.findAll()).hasSize(2);
         assertThat(this.businessHourRepository.findAll()).hasSize(1);

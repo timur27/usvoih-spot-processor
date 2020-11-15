@@ -1,11 +1,11 @@
-package com.usvoih.persistence.validation;
+package com.usvoih.persistence.process;
 
 import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.repository.TypeRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TypeProcessor implements UniqueEntryProcessor<Spot> {
+public class TypeProcessor implements ReusableColumnsProcessor<Spot> {
 
     private final TypeRepository typeRepository;
 

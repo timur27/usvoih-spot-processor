@@ -1,11 +1,11 @@
-package com.usvoih.persistence.validation;
+package com.usvoih.persistence.process;
 
 import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.repository.BusinessHourRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BusinessHourProcessor implements UniqueEntryProcessor<Spot> {
+public class BusinessHourProcessor implements ReusableColumnsProcessor<Spot> {
 
     private final BusinessHourRepository businessHourRepository;
 

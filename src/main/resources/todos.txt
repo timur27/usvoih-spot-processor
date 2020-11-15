@@ -1,3 +1,4 @@
+// TODO Add json for error on unique fields validation (US-112)
 // TODO Review UniqueEntryProcessor implementations
 // TODO init entity->repo map when initializing context
 // TODO decide if not change String phone to int phone

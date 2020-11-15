@@ -27,4 +27,10 @@ public class ErrorHandler {
 
         return ResponseEntity.badRequest().body(new SpotValidationError(errors));
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<SpotValidationError> handleValidationExceptions(ValidationException ex) {
+        return ResponseEntity.badRequest().body(new SpotValidationError(List.of(ex.getMessage())));
+    }
 }
