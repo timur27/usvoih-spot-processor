@@ -4,7 +4,7 @@ import com.usvoih.dto.Unique;
 import com.usvoih.persistence.domain.Spot;
 import com.usvoih.persistence.process.ReusableColumnsProcessorMap;
 import com.usvoih.persistence.repository.SpotRepository;
-import com.usvoih.processing.validation.NameColumnProcessor;
+import com.usvoih.processing.validation.Validator;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -17,15 +17,15 @@ import static java.util.Objects.requireNonNull;
 public class SpotService {
 
     private final SpotRepository spotRepository;
-    private final NameColumnProcessor nameColumnProcessor;
+    private final Validator validator;
 
-    public SpotService(SpotRepository spotRepository, NameColumnProcessor nameColumnProcessor) {
+    public SpotService(SpotRepository spotRepository, Validator validator) {
         this.spotRepository = spotRepository;
-        this.nameColumnProcessor = nameColumnProcessor;
+        this.validator = validator;
     }
 
     public Spot validateAndSave(Spot spot) {
-        nameColumnProcessor.process(spot.getName());
+        validator.validate(spot);
         cascadeSaveUniqueChildren(spot);
         return spotRepository.save(spot);
     }

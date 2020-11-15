@@ -43,6 +43,7 @@ public class SpotServiceTest {
         Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         Spot duplicatedSpot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         duplicatedSpot.setName("Unique name");
+        duplicatedSpot.getAddresses().forEach(address -> address.setCity("Unique City"));
         this.spotService.validateAndSave(spot);
 
         this.spotService.validateAndSave(duplicatedSpot);
@@ -56,6 +57,7 @@ public class SpotServiceTest {
         Spot spot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         Spot duplicatedSpot = this.modelMapper.map(SpotTestConfiguration.createTestSpot(), Spot.class);
         duplicatedSpot.setName("Unique name");
+        duplicatedSpot.getAddresses().forEach(address -> address.setCity("Unique City"));
         this.spotService.validateAndSave(spot);
 
         this.spotService.validateAndSave(duplicatedSpot);
