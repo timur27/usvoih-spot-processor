@@ -5,8 +5,6 @@ import com.usvoih.dto.Category;
 import com.usvoih.dto.Unique;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
